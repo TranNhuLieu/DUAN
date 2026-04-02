@@ -48,5 +48,5 @@
 
 
 ---
-*Phát triển bởi [Phạm Thị Ái Ngân]*
-[Trần Đức Minh]
+*Phát triển bởi [Trần Như Liễu]*
+
