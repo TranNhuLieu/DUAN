@@ -1,0 +1,523 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap');
+
+/* --- 1. Cấu hình chung & Biến màu (Đồng bộ với game.css/lobby.css) --- */
+:root {
+    /* Gaming Neon Color Palette */
+    --neon-blue: #00d4ff;
+    --neon-purple: #c759ff;
+    --neon-gold: #ffdf00;
+    --neon-pink: #ff0080;
+    --neon-green: #00ff88;
+    
+    /* Primary Gaming Colors */
+    --primary-color: var(--neon-blue);
+    --secondary-color: var(--neon-purple);
+    --danger-color: #ff3366;
+    
+    /* Gaming Backgrounds */
+    --dark-bg: #0a0a0a;
+    --card-bg: rgba(15, 15, 35, 0.9);
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --text-light: #ffffff;
+    --text-muted: #888888;
+    
+    /* Gaming Effects */
+    --glow-blue: 0 0 10px var(--neon-blue), 0 0 20px var(--neon-blue);
+    --glow-purple: 0 0 10px var(--neon-purple), 0 0 20px var(--neon-purple);
+    --shadow-neon: 0 0 15px rgba(0, 212, 255, 0.3);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Rajdhani', sans-serif;
+    background: linear-gradient(135deg, #000814 0%, #001d3d 50%, #000814 100%);
+    color: var(--text-light);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Hiệu ứng nền vũ trụ động */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 20% 80%, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(199, 89, 255, 0.1) 0%, transparent 50%);
+    animation: cosmicPulse 10s ease-in-out infinite alternate;
+    z-index: -1;
+}
+
+@keyframes cosmicPulse {
+    0% { opacity: 0.3; }
+    100% { opacity: 0.6; }
+}
+
+/* --- 2. Auth Container & Card --- */
+.auth-container {
+    width: 100%;
+    max-width: 450px;
+    position: relative;
+    z-index: 1;
+}
+
+.auth-card {
+    background: var(--card-bg);
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 0 30px rgba(0, 212, 255, 0.2);
+    border: 2px solid var(--neon-blue);
+    backdrop-filter: blur(10px);
+    animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* --- 3. Header --- */
+.auth-header {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.auth-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--neon-blue);
+    text-shadow: 0 0 10px var(--neon-blue);
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.auth-subtitle {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+}
+
+/* --- 4. Forms --- */
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: var(--neon-purple);
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+}
+
+.input-group {
+    position: relative;
+}
+
+.input-group i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--neon-blue);
+    font-size: 1.1rem;
+    transition: color 0.3s;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 15px 15px 15px 45px;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(0, 212, 255, 0.3);
+    border-radius: 10px;
+    color: var(--text-light);
+    font-size: 1.1rem;
+    font-family: 'Rajdhani', sans-serif;
+    transition: all 0.3s;
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: var(--neon-blue);
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.2);
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.input-group input:focus + i {
+    color: var(--neon-green);
+}
+
+.input-group input::placeholder {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+.password-toggle {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.password-toggle:hover {
+    color: var(--neon-blue);
+}
+
+.error-message {
+    color: var(--danger-color);
+    font-size: 0.9rem;
+    margin-top: 8px;
+    display: none;
+    font-weight: 600;
+    text-shadow: 0 0 5px rgba(255, 51, 102, 0.5);
+}
+
+.error-message.show {
+    display: block;
+    animation: shake 0.3s ease-in-out;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+/* --- 5. Options (Remember me, Forgot Pass) --- */
+.form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.remember-me {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    color: var(--text-muted);
+    transition: color 0.3s;
+}
+
+.remember-me:hover {
+    color: var(--text-light);
+}
+
+.remember-me input[type="checkbox"] {
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 2px solid var(--neon-blue);
+    border-radius: 4px;
+    background: transparent;
+    cursor: pointer;
+    position: relative;
+}
+
+.remember-me input[type="checkbox"]:checked {
+    background: var(--neon-blue);
+}
+
+.remember-me input[type="checkbox"]:checked::after {
+    content: '✔';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #000;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.forgot-password {
+    color: var(--neon-blue);
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: all 0.3s;
+}
+
+.forgot-password:hover {
+    color: var(--neon-purple);
+    text-shadow: 0 0 5px var(--neon-purple);
+}
+
+/* --- 6. Buttons --- */
+.btn-auth {
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.4);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-auth::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s ease;
+}
+
+.btn-auth:hover::before {
+    left: 100%;
+}
+
+.btn-auth:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 25px rgba(199, 89, 255, 0.6);
+}
+
+.auth-footer {
+    text-align: center;
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-muted);
+}
+
+.auth-footer a {
+    color: var(--neon-green);
+    text-decoration: none;
+    font-weight: 700;
+    margin-left: 5px;
+    transition: all 0.3s;
+}
+
+.auth-footer a:hover {
+    color: var(--neon-blue);
+    text-shadow: 0 0 10px var(--neon-blue);
+}
+
+/* --- 7. Password Strength --- */
+.password-strength {
+    margin-top: 10px;
+}
+
+.strength-bar {
+    height: 6px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+    margin-bottom: 5px;
+    overflow: hidden;
+}
+
+.strength-fill {
+    height: 100%;
+    width: 0%;
+    transition: width 0.3s, background 0.3s;
+}
+
+.strength-text {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    text-align: right;
+    font-weight: 600;
+}
+
+/* --- 8. Modal Forgot Password --- */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.85);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(5px);
+}
+
+.modal-overlay.active {
+    display: flex;
+    animation: fadeIn 0.3s ease;
+}
+
+.modal-content {
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    border-radius: 15px;
+    padding: 30px;
+    width: 100%;
+    max-width: 450px;
+    border: 2px solid var(--neon-purple);
+    box-shadow: 0 0 30px rgba(199, 89, 255, 0.3);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 15px;
+}
+
+.modal-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.5rem;
+    color: var(--neon-purple);
+    text-shadow: 0 0 10px var(--neon-purple);
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.modal-close:hover {
+    color: var(--danger-color);
+}
+
+.modal-body {
+    margin-bottom: 25px;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+}
+
+.btn-modal {
+    padding: 10px 25px;
+    border-radius: 8px;
+    border: none;
+    font-family: 'Orbitron', sans-serif;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-modal.btn-primary {
+    background: var(--neon-purple);
+    color: white;
+    box-shadow: 0 0 10px var(--neon-purple);
+}
+
+.btn-modal.btn-primary:hover {
+    background: #a020f0;
+}
+
+.btn-modal.btn-secondary {
+    background: transparent;
+    border: 1px solid var(--text-muted);
+    color: var(--text-light);
+}
+
+.btn-modal.btn-secondary:hover {
+    border-color: var(--text-light);
+}
+
+/* --- 9. Loading --- */
+.loading {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 2000;
+    align-items: center;
+    justify-content: center;
+}
+
+.loading.active {
+    display: flex;
+}
+
+.spinner {
+    width: 60px;
+    height: 60px;
+    border: 4px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    border-top-color: var(--neon-blue);
+    border-right-color: var(--neon-purple);
+    border-bottom-color: var(--neon-pink);
+    animation: spin 1s linear infinite;
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* --- 10. Demo Accounts Box --- */
+.demo-accounts {
+    margin-top: 25px;
+    padding: 15px;
+    background: rgba(255, 193, 7, 0.1);
+    border-radius: 10px;
+    border-left: 4px solid var(--neon-gold);
+}
+
+.demo-accounts h4 {
+    color: var(--neon-gold);
+    margin-bottom: 10px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+}
+
+.demo-account {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 8px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    color: #ddd;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+.demo-account:last-child {
+            margin-bottom: 0;
+        }
+/* Responsive */
+@media (max-width: 480px) {
+    .auth-card {
+        padding: 25px;
+    }
+    
+    .auth-title {
+        font-size: 1.5rem;
+    }
+}

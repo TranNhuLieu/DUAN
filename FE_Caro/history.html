@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lịch Sử Trận Đấu - Caro Online</title>
+    <link rel="stylesheet" href="css/history.css" />
+  </head>
+  <body>
+    <div class="history-container">
+      <!-- Header -->
+      <header class="history-header">
+        <div class="header-content">
+          <h1 class="page-title">🎮 Lịch Sử Trận Đấu</h1>
+          <button class="btn-back" onclick="window.location.href='lobby.html'">
+            ← Quay lại Lobby
+          </button>
+        </div>
+      </header>
+
+      <!-- Filters -->
+      <section class="history-filters">
+        <div class="filter-group">
+          <label for="resultFilter">Kết quả:</label>
+          <select id="resultFilter" class="filter-select">
+            <option value="all">Tất cả</option>
+            <option value="win">Thắng</option>
+            <option value="lose">Thua</option>
+            <option value="draw">Hòa</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label for="dateFrom">Từ ngày:</label>
+          <input type="date" id="dateFrom" class="filter-input" />
+        </div>
+
+        <div class="filter-group">
+          <label for="dateTo">Đến ngày:</label>
+          <input type="date" id="dateTo" class="filter-input" />
+        </div>
+
+        <button class="btn-filter">🔍 Lọc</button>
+        <button class="btn-reset">🔄 Đặt lại</button>
+      </section>
+
+      <!-- Stats Summary -->
+      <section class="stats-summary">
+        <div class="stat-card stat-total">
+          <div class="stat-value" id="totalMatches">15</div>
+          <div class="stat-label">Tổng trận</div>
+        </div>
+        <div class="stat-card stat-win">
+          <div class="stat-value" id="totalWins">8</div>
+          <div class="stat-label">Thắng</div>
+        </div>
+        <div class="stat-card stat-lose">
+          <div class="stat-value" id="totalLoses">5</div>
+          <div class="stat-label">Thua</div>
+        </div>
+        <div class="stat-card stat-draw">
+          <div class="stat-value" id="totalDraws">2</div>
+          <div class="stat-label">Hòa</div>
+        </div>
+      </section>
+
+      <!-- Match History Table -->
+      <div class="table-container">
+        <table class="history-table">
+          <thead>
+            <tr>
+              <th>Thời gian</th>
+              <th>Bạn chơi</th>
+              <th>Đối thủ</th>
+              <th>Kết quả</th>
+              <th>Số nước đi</th>
+              <th>Thời lượng</th>
+              <th>Thao tác</th>
+            </tr>
+          </thead>
+          <tbody id="historyBody">
+            <!-- Sample Data - Will be populated by JS -->
+            <tr class="match-row">
+              <td class="match-time">2025-12-16 20:15</td>
+              <td class="player-symbol">
+                <span class="symbol symbol-x">✖</span>
+              </td>
+              <td class="opponent-name">player_2</td>
+              <td class="match-result">
+                <span class="result-badge result-win">Thắng</span>
+              </td>
+              <td class="match-moves">42 nước</td>
+              <td class="match-duration">12:30</td>
+              <td class="match-actions">
+                <button class="btn-replay" title="Xem lại trận đấu">
+                  ▶ Xem lại
+                </button>
+              </td>
+            </tr>
+
+            <tr class="match-row">
+              <td class="match-time">2025-12-15 18:45</td>
+              <td class="player-symbol">
+                <span class="symbol symbol-o">⭕</span>
+              </td>
+              <td class="opponent-name">player_3</td>
+              <td class="match-result">
+                <span class="result-badge result-lose">Thua</span>
+              </td>
+              <td class="match-moves">38 nước</td>
+              <td class="match-duration">10:15</td>
+              <td class="match-actions">
+                <button class="btn-replay" title="Xem lại trận đấu">
+                  ▶ Xem lại
+                </button>
+              </td>
+            </tr>
+
+            <tr class="match-row">
+              <td class="match-time">2025-12-15 17:20</td>
+              <td class="player-symbol">
+                <span class="symbol symbol-x">✖</span>
+              </td>
+              <td class="opponent-name">player_5</td>
+              <td class="match-result">
+                <span class="result-badge result-draw">Hòa</span>
+              </td>
+              <td class="match-moves">225 nước</td>
+              <td class="match-duration">45:00</td>
+              <td class="match-actions">
+                <button class="btn-replay" title="Xem lại trận đấu">
+                  ▶ Xem lại
+                </button>
+              </td>
+            </tr>
+
+            <tr class="match-row">
+              <td class="match-time">2025-12-14 21:30</td>
+              <td class="player-symbol">
+                <span class="symbol symbol-o">⭕</span>
+              </td>
+              <td class="opponent-name">player_7</td>
+              <td class="match-result">
+                <span class="result-badge result-win">Thắng</span>
+              </td>
+              <td class="match-moves">56 nước</td>
+              <td class="match-duration">15:45</td>
+              <td class="match-actions">
+                <button class="btn-replay" title="Xem lại trận đấu">
+                  ▶ Xem lại
+                </button>
+              </td>
+            </tr>
+
+            <tr class="match-row">
+              <td class="match-time">2025-12-14 20:00</td>
+              <td class="player-symbol">
+                <span class="symbol symbol-x">✖</span>
+              </td>
+              <td class="opponent-name">player_1</td>
+              <td class="match-result">
+                <span class="result-badge result-lose">Thua</span>
+              </td>
+              <td class="match-moves">31 nước</td>
+              <td class="match-duration">08:20</td>
+              <td class="match-actions">
+                <button class="btn-replay" title="Xem lại trận đấu">
+                  ▶ Xem lại
+                </button>
+              </td>
+            </tr>
+
+            <tr class="match-row">
+              <td class="match-time">2025-12-13 19:15</td>
+              <td class="player-symbol">
+                <span class="symbol symbol-o">⭕</span>
+              </td>
+              <td class="opponent-name">player_9</td>
+              <td class="match-result">
+                <span class="result-badge result-win">Thắng</span>
+              </td>
+              <td class="match-moves">47 nước</td>
+              <td class="match-duration">13:10</td>
+              <td class="match-actions">
+                <button class="btn-replay" title="Xem lại trận đấu">
+                  ▶ Xem lại
+                </button>
+              </td>
+            </tr>
+
+            <tr class="match-row">
+              <td class="match-time">2025-12-13 18:00</td>
+              <td class="player-symbol">
+                <span class="symbol symbol-x">✖</span>
+              </td>
+              <td class="opponent-name">player_4</td>
+              <td class="match-result">
+                <span class="result-badge result-win">Thắng</span>
+              </td>
+              <td class="match-moves">35 nước</td>
+              <td class="match-duration">09:45</td>
+              <td class="match-actions">
+                <button class="btn-replay" title="Xem lại trận đấu">
+                  ▶ Xem lại
+                </button>
+              </td>
+            </tr>
+
+            <tr class="match-row">
+              <td class="match-time">2025-12-12 22:30</td>
+              <td class="player-symbol">
+                <span class="symbol symbol-o">⭕</span>
+              </td>
+              <td class="opponent-name">player_6</td>
+              <td class="match-result">
+                <span class="result-badge result-draw">Hòa</span>
+              </td>
+              <td class="match-moves">225 nước</td>
+              <td class="match-duration">50:00</td>
+              <td class="match-actions">
+                <button class="btn-replay" title="Xem lại trận đấu">
+                  ▶ Xem lại
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Empty State -->
+        <div class="empty-state" style="display: none">
+          <div class="empty-icon">📭</div>
+          <p class="empty-text">Chưa có trận đấu nào</p>
+          <p class="empty-subtext">
+            Bắt đầu chơi để xem lịch sử trận đấu của bạn!
+          </p>
+        </div>
+      </div>
+
+      <!-- Pagination -->
+      <div class="pagination">
+        <button class="btn-page btn-prev" disabled>← Trang trước</button>
+
+        <div class="page-info">
+          <span class="current-page">1</span>
+          <span class="page-separator">/</span>
+          <span class="total-pages">3</span>
+        </div>
+
+        <button class="btn-page btn-next">Trang sau →</button>
+      </div>
+    </div>
+
+    <!-- Optional: Add JavaScript for interactivity -->
+    <script>
+      // Sample data structure for reference
+      const sampleMatchData = {
+        opponent: "player_2",
+        result: "WIN", // WIN, LOSE, DRAW
+        totalMoves: 42,
+        duration: "12:30",
+        playedAt: "2025-03-30 20:15",
+        playerSymbol: "X", // X or O
+      };
+
+      // Placeholder for future JS integration
+      console.log("History page loaded. Ready for API integration.");
+    </script>
+  </body>
+</html>

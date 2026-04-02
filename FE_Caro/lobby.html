@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Phòng chờ - Cờ Caro Online</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/lobby.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <header class="lobby-header">
+      <div class="container">
+        <div class="header-content">
+          <a href="index.html" class="logo">
+            <i class="fas fa-gamepad"></i>
+            <span>Cờ Caro Online</span>
+          </a>
+
+          <div class="user-info">
+            <div class="user-avatar">
+              <img src="" alt="Avatar" id="userAvatar" />
+              <button
+                class="avatar-change-btn"
+                id="changeAvatarBtn"
+                title="Đổi avatar"
+              >
+                <i class="fas fa-camera"></i>
+              </button>
+            </div>
+            <div class="user-details">
+              <span class="username" id="usernameDisplay">Đang tải...</span>
+              <span class="elo" id="eloDisplay">Elo: 1500</span>
+            </div>
+          </div>
+
+          <div class="header-actions">
+            <button class="btn btn-danger" id="logoutBtn">
+              <i class="fas fa-sign-out-alt"></i> Đăng xuất
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="lobby-container">
+      <div class="container">
+        <section class="quick-match">
+          <div class="match-card">
+            <h2><i class="fas fa-bolt"></i> Chơi nhanh</h2>
+            <p>Tìm đối thủ ngẫu nhiên với cùng trình độ</p>
+
+            <div style="text-align: center; margin: 30px 0">
+              <button
+                class="btn btn-primary btn-large"
+                id="quickPlayBtn"
+                style="padding: 15px 30px; font-size: 1.2rem"
+              >
+                <i class="fas fa-search"></i> Tìm trận ngay
+              </button>
+              <button
+                class="btn btn-success btn-large"
+                id="playBotBtn"
+                style="
+                  padding: 15px 30px;
+                  font-size: 1.2rem;
+                  margin-left: 15px;
+                  background-color: #28a745;
+                "
+              >
+                <i class="fas fa-robot"></i> Đấu với Máy
+              </button>
+            </div>
+
+            <div
+              id="matchStatus"
+              style="
+                display: none;
+                text-align: center;
+                padding: 20px;
+                background: rgba(0, 0, 0, 0.3);
+                border-radius: 10px;
+                margin-top: 20px;
+              "
+            >
+              <div style="color: var(--neon-blue); font-size: 1.2rem">
+                <i class="fas fa-spinner fa-spin"></i>
+                <span id="searchTimer">Đang tìm đối thủ... 0s</span>
+              </div>
+              <div style="margin-top: 15px" id="matchActions">
+                <button class="btn btn-danger" id="cancelSearchBtn">
+                  <i class="fas fa-times"></i> Hủy tìm kiếm
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="game-stats" style="margin-top: 30px">
+          <div class="stats-card">
+            <h3><i class="fas fa-chart-line"></i> Thống kê cá nhân</h3>
+            <div style="text-align: center; padding: 20px">
+              <div
+                style="
+                  display: flex;
+                  justify-content: space-around;
+                  margin-bottom: 20px;
+                "
+              >
+                <div>
+                  <div
+                    style="font-size: 2rem; color: var(--neon-blue)"
+                    id="statWins"
+                  >
+                    0
+                  </div>
+                  <div style="color: var(--text-muted)">Thắng</div>
+                </div>
+                <div>
+                  <div
+                    style="font-size: 2rem; color: var(--neon-pink)"
+                    id="statLosses"
+                  >
+                    0
+                  </div>
+                  <div style="color: var(--text-muted)">Thua</div>
+                </div>
+                <div>
+                  <div
+                    style="font-size: 2rem; color: var(--neon-green)"
+                    id="statRate"
+                  >
+                    0%
+                  </div>
+                  <div style="color: var(--text-muted)">Tỷ lệ</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="lobby-actions">
+          <button class="btn btn-secondary" onclick="openModal('history')">
+            <i class="fas fa-history"></i> Lịch sử đấu
+          </button>
+          <button class="btn btn-secondary" onclick="openModal('ranking')">
+            <i class="fas fa-trophy"></i> Bảng xếp hạng
+          </button>
+        </section>
+      </div>
+    </main>
+
+    <div id="dataModal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+
+        <div class="tab-nav">
+          <button
+            class="tab-btn active"
+            onclick="switchTab('history')"
+            id="btnTabHistory"
+          >
+            Lịch sử đấu
+          </button>
+          <button
+            class="tab-btn"
+            onclick="switchTab('ranking')"
+            id="btnTabRanking"
+          >
+            Bảng xếp hạng
+          </button>
+        </div>
+
+        <div id="tabHistory">
+          <h3 style="color: var(--neon-blue); text-align: center">
+            Lịch sử 10 trận gần nhất
+          </h3>
+          <table class="custom-table">
+            <thead>
+              <tr>
+                <th>Thời gian</th>
+                <th>Đối thủ</th>
+                <th>Kết quả</th>
+                <th>Số nước</th>
+              </tr>
+            </thead>
+            <tbody id="historyTableBody">
+              <tr>
+                <td colspan="4">Đang tải dữ liệu...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div id="tabRanking" style="display: none">
+          <h3 style="color: var(--neon-gold); text-align: center">
+            Top Cao Thủ Server
+          </h3>
+          <table class="custom-table">
+            <thead>
+              <tr>
+                <th>Hạng</th>
+                <th>Người chơi</th>
+                <th>Điểm Elo</th>
+                <th>Thắng/Thua</th>
+              </tr>
+            </thead>
+            <tbody id="rankingTableBody">
+              <tr>
+                <td
+                  colspan="4"
+                  style="text-align: center; color: var(--text-muted)"
+                >
+                  <i class="fas fa-spinner fa-spin"></i> Đang tải bảng xếp
+                  hạng...
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Chọn Avatar -->
+    <div class="modal" id="avatarModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3><i class="fas fa-camera"></i> Chọn Avatar</h3>
+          <button class="close-modal" onclick="closeAvatarModal()">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="avatar-grid" id="avatarGrid">
+            <!-- Avatar options sẽ được tạo bằng JavaScript -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="js/services/websocket.js"></script>
+    <script src="js/matchmaking/lobby.js"></script>
+
+    <script>
+      const modal = document.getElementById("dataModal");
+
+      function openModal(type) {
+        modal.style.display = "flex";
+        switchTab(type);
+      }
+
+      // 2. Đóng Modal
+      function closeModal() {
+        modal.style.display = "none";
+      }
+
+      // 3. Chuyển Tab và gọi dữ liệu
+      function switchTab(tabName) {
+        // Ẩn/Hiện nội dung tab
+        document.getElementById("tabHistory").style.display =
+          tabName === "history" ? "block" : "none";
+        document.getElementById("tabRanking").style.display =
+          tabName === "ranking" ? "block" : "none";
+
+        // Active nút bấm
+        document
+          .getElementById("btnTabHistory")
+          .classList.toggle("active", tabName === "history");
+        document
+          .getElementById("btnTabRanking")
+          .classList.toggle("active", tabName === "ranking");
+
+        // Gọi dữ liệu tương ứng
+        if (tabName === "history") {
+          loadHistory();
+        } else if (tabName === "ranking") {
+          loadRanking();
+        }
+      }
+
+      // Đóng modal khi click ra ngoài
+      window.onclick = function (event) {
+        if (event.target == modal) {
+          closeModal();
+        }
+      };
+
+      function getSocket() {
+        // Kiểm tra xem wsService có tồn tại và đang kết nối không
+        if (
+          typeof wsService !== "undefined" &&
+          wsService.socket &&
+          wsService.socket.readyState === WebSocket.OPEN
+        ) {
+          return wsService;
+        }
+        console.warn("WebSocket chưa kết nối!");
+        return null;
+      }
+
+      function loadHistory() {
+        const ws = getSocket();
+        const user = JSON.parse(localStorage.getItem("user"));
+        if (ws && user) {
+          ws.send({
+            type: "GET_HISTORY",
+            username: user.username,
+          });
+        }
+      }
+
+      function loadRanking() {
+        const ws = getSocket();
+        if (ws) {
+          // Gửi yêu cầu lấy Top BXH (ví dụ lấy top 10)
+          ws.send({
+            type: "GET_RANKING",
+            limit: 10,
+          });
+        }
+      }
+
+      window.renderRankingTable = function (rankingList) {
+        const tbody = document.getElementById("rankingTableBody");
+        tbody.innerHTML = "";
+
+        if (!rankingList || rankingList.length === 0) {
+          tbody.innerHTML =
+            '<tr><td colspan="4">Chưa có dữ liệu xếp hạng</td></tr>';
+          return;
+        }
+
+        rankingList.forEach((player, index) => {
+          const rank = index + 1;
+          let rankDisplay = rank;
+
+          if (rank === 1)
+            rankDisplay = `<i class="fas fa-crown" style="color: gold;"></i> 1`;
+          else if (rank === 2)
+            rankDisplay = `<i class="fas fa-medal" style="color: silver;"></i> 2`;
+          else if (rank === 3)
+            rankDisplay = `<i class="fas fa-medal" style="color: #cd7f32;"></i> 3`; // Màu đồng
+
+          const row = `
+                <tr>
+                    <td>${rankDisplay}</td>
+                    <td style="font-weight: bold; color: var(--neon-blue);">${
+                      player.username
+                    }</td>
+                    <td>${player.score || player.elo}</td> <td>${
+            player.wins || 0
+          } / ${player.losses || 0}</td>
+                </tr>
+            `;
+          tbody.innerHTML += row;
+        });
+      };
+
+      window.renderHistoryTable = function (historyList) {
+        const tbody = document.getElementById("historyTableBody");
+        tbody.innerHTML = "";
+
+        if (!historyList || historyList.length === 0) {
+          tbody.innerHTML =
+            '<tr><td colspan="4">Chưa có trận đấu nào</td></tr>';
+          return;
+        }
+
+        historyList.forEach((match) => {
+          const resultColor =
+            match.result === "WIN" ? "var(--neon-green)" : "var(--neon-pink)";
+          const row = `
+                <tr>
+                    <td>${new Date(match.time).toLocaleDateString()}</td>
+                    <td>${match.opponent}</td>
+                    <td style="color: ${resultColor}">${match.result}</td>
+                    <td>${match.moves}</td>
+                </tr>
+            `;
+          tbody.innerHTML += row;
+        });
+      };
+    </script>
+  </body>
+</html>
