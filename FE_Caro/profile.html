@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thông tin cá nhân - Cờ Caro Online</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/profile.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="profile-header">
+      <div class="container">
+        <div class="header-content">
+          <a href="lobby.html" class="logo">
+            <i class="fas fa-gamepad"></i>
+            <span>Cờ Caro Online</span>
+          </a>
+
+          <div class="header-actions">
+            <button
+              class="btn btn-primary"
+              onclick="window.location.href='lobby.html'"
+            >
+              <i class="fas fa-home"></i>
+              Về phòng chờ
+            </button>
+            <button
+              class="btn btn-secondary"
+              onclick="window.location.href='history.html'"
+            >
+              <i class="fas fa-history"></i>
+              Lịch sử
+            </button>
+            <button class="btn btn-danger" id="logoutBtn">
+              <i class="fas fa-sign-out-alt"></i>
+              Đăng xuất
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="profile-container">
+      <div class="container">
+        <div class="profile-layout">
+          <!-- Left Column: Profile Info -->
+          <div class="profile-sidebar">
+            <!-- Avatar Section -->
+            <div class="avatar-card">
+              <div class="avatar-wrapper">
+                <img src="" alt="Avatar" id="profileAvatar" />
+                <button class="avatar-change" id="changeAvatarBtn">
+                  <i class="fas fa-camera"></i>
+                </button>
+              </div>
+              <h2 id="profileUsername">Đang tải...</h2>
+              <div class="user-rank">
+                <i class="fas fa-trophy"></i>
+                <span id="userRank">Hạng: #...</span>
+              </div>
+              <div class="user-elo">
+                <i class="fas fa-chart-line"></i>
+                <span id="userElo">Elo: 1500</span>
+              </div>
+            </div>
+
+            <!-- Basic Info -->
+            <div class="info-card">
+              <h3><i class="fas fa-info-circle"></i> Thông tin cá nhân</h3>
+              <div class="info-grid">
+                <div class="info-item">
+                  <span class="info-label">Tên đăng nhập:</span>
+                  <span class="info-value" id="infoUsername">Đang tải...</span>
+                </div>
+                <div class="info-item">
+                  <span class="info-label">Email:</span>
+                  <span class="info-value" id="infoEmail">Đang tải...</span>
+                </div>
+                <div class="info-item">
+                  <span class="info-label">Ngày tham gia:</span>
+                  <span class="info-value" id="joinDate">01/01/2024</span>
+                </div>
+                <div class="info-item">
+                  <span class="info-label">Tổng số trận:</span>
+                  <span class="info-value" id="totalGames">0</span>
+                </div>
+                <div class="info-item">
+                  <span class="info-label">Elo cao nhất:</span>
+                  <span class="info-value" id="highestElo">1500</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="actions-card">
+              <h3><i class="fas fa-cogs"></i> Thao tác nhanh</h3>
+              <div class="action-buttons">
+                <button class="btn-action" id="changePasswordBtn">
+                  <i class="fas fa-key"></i>
+                  Đổi mật khẩu
+                </button>
+                <button class="btn-action" id="changeUsernameBtn">
+                  <i class="fas fa-user-edit"></i>
+                  Đổi tên
+                </button>
+                <button class="btn-action" id="changeEmailBtn">
+                  <i class="fas fa-envelope"></i>
+                  Đổi email
+                </button>
+                <button class="btn-action" id="exportDataBtn">
+                  <i class="fas fa-download"></i>
+                  Xuất dữ liệu
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Stats & History -->
+          <div class="profile-content">
+            <!-- Statistics -->
+            <section class="stats-section">
+              <h2><i class="fas fa-chart-bar"></i> Thống kê chi tiết</h2>
+              <div class="stats-grid-large">
+                <div class="stat-card">
+                  <div class="stat-icon">
+                    <i class="fas fa-gamepad"></i>
+                  </div>
+                  <div class="stat-content">
+                    <div class="stat-value" id="statsTotalGames">0</div>
+                    <div class="stat-label">Tổng số trận</div>
+                  </div>
+                </div>
+
+                <div class="stat-card">
+                  <div class="stat-icon">
+                    <i class="fas fa-trophy"></i>
+                  </div>
+                  <div class="stat-content">
+                    <div class="stat-value" id="statsWins">0</div>
+                    <div class="stat-label">Thắng</div>
+                  </div>
+                </div>
+
+                <div class="stat-card">
+                  <div class="stat-icon">
+                    <i class="fas fa-times"></i>
+                  </div>
+                  <div class="stat-content">
+                    <div class="stat-value" id="statsLosses">0</div>
+                    <div class="stat-label">Thua</div>
+                  </div>
+                </div>
+
+                <div class="stat-card">
+                  <div class="stat-icon">
+                    <i class="fas fa-handshake"></i>
+                  </div>
+                  <div class="stat-content">
+                    <div class="stat-value" id="statsDraws">0</div>
+                    <div class="stat-label">Hòa</div>
+                  </div>
+                </div>
+
+                <div class="stat-card">
+                  <div class="stat-icon">
+                    <i class="fas fa-chart-line"></i>
+                  </div>
+                  <div class="stat-content">
+                    <div class="stat-value" id="statsElo">1500</div>
+                    <div class="stat-label">Điểm Elo</div>
+                  </div>
+                </div>
+
+                <div class="stat-card">
+                  <div class="stat-icon">
+                    <i class="fas fa-percentage"></i>
+                  </div>
+                  <div class="stat-content">
+                    <div class="stat-value" id="statsWinRate">0%</div>
+                    <div class="stat-label">Tỷ lệ thắng</div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- Performance Chart -->
+            <section class="chart-section">
+              <h2><i class="fas fa-chart-line"></i> Biểu đồ Elo (30 ngày)</h2>
+              <div class="chart-container">
+                <canvas id="eloChart"></canvas>
+              </div>
+              <div class="chart-controls">
+                <button class="btn-chart" onclick="loadEloChart('week')">Tuần</button>
+                <button class="btn-chart active" onclick="loadEloChart('month')">Tháng</button>
+                <button class="btn-chart" onclick="loadEloChart('year')">Năm</button>
+              </div>
+            </section>
+
+            <!-- Recent Matches -->
+            <section class="matches-section">
+              <div class="section-header">
+                <h2><i class="fas fa-history"></i> 5 trận gần nhất</h2>
+                <a href="history.html" class="view-all">Xem tất cả →</a>
+              </div>
+              <div class="matches-list" id="recentMatchesList">
+                <!-- Match items will be loaded here -->
+                <div class="empty-matches">
+                  <i class="fas fa-gamepad"></i>
+                  <p>Chưa có trận đấu nào</p>
+                </div>
+              </div>
+            </section>
+
+            <!-- Achievements -->
+            <section class="achievements-section">
+              <h2><i class="fas fa-award"></i> Thành tích</h2>
+              <div class="achievements-grid" id="achievementsGrid">
+                <div class="achievement">
+                  <div class="achievement-icon">
+                    <i class="fas fa-star"></i>
+                  </div>
+                  <div class="achievement-info">
+                    <h4>Chiến thắng đầu tiên</h4>
+                    <p>Chiến thắng trận đầu tiên</p>
+                    <span class="achievement-status" id="achievement1">Chưa đạt</span>
+                  </div>
+                </div>
+                <div class="achievement">
+                  <div class="achievement-icon">
+                    <i class="fas fa-trophy"></i>
+                  </div>
+                  <div class="achievement-info">
+                    <h4>Chuyên gia Caro</h4>
+                    <p>Thắng 10 trận</p>
+                    <span class="achievement-status" id="achievement2">Chưa đạt</span>
+                  </div>
+                </div>
+                <div class="achievement">
+                  <div class="achievement-icon">
+                    <i class="fas fa-fire"></i>
+                  </div>
+                  <div class="achievement-info">
+                    <h4>Chuỗi thắng</h4>
+                    <p>Thắng 5 trận liên tiếp</p>
+                    <span class="achievement-status" id="achievement3">Chưa đạt</span>
+                  </div>
+                </div>
+                <div class="achievement">
+                  <div class="achievement-icon">
+                    <i class="fas fa-chart-line"></i>
+                  </div>
+                  <div class="achievement-info">
+                    <h4>Elo Cao</h4>
+                    <p>Đạt 1600 điểm Elo</p>
+                    <span class="achievement-status" id="achievement4">Chưa đạt</span>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Modal: Change Password -->
+    <div class="modal" id="changePasswordModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3><i class="fas fa-key"></i> Đổi mật khẩu</h3>
+          <button class="close-modal" id="closePasswordModal">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Mật khẩu hiện tại</label>
+            <input
+              type="password"
+              id="currentPassword"
+              placeholder="Nhập mật khẩu hiện tại"
+            />
+          </div>
+          <div class="form-group">
+            <label>Mật khẩu mới</label>
+            <input
+              type="password"
+              id="newPassword"
+              placeholder="Nhập mật khẩu mới"
+            />
+          </div>
+          <div class="form-group">
+            <label>Xác nhận mật khẩu mới</label>
+            <input
+              type="password"
+              id="confirmNewPassword"
+              placeholder="Nhập lại mật khẩu mới"
+            />
+          </div>
+          <div id="passwordError" style="color: #ff5555; display: none; margin-top: 10px;"></div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" id="cancelPasswordChange">
+            Hủy
+          </button>
+          <button class="btn btn-primary" id="savePasswordChange">
+            Lưu thay đổi
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal: Change Email -->
+    <div class="modal" id="changeEmailModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3><i class="fas fa-envelope"></i> Đổi email</h3>
+          <button class="close-modal" id="closeEmailModal">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Email hiện tại</label>
+            <input
+              type="email"
+              id="currentEmail"
+              disabled
+              placeholder="Đang tải..."
+            />
+          </div>
+          <div class="form-group">
+            <label>Email mới</label>
+            <input
+              type="email"
+              id="newEmail"
+              placeholder="Nhập email mới"
+            />
+          </div>
+          <div class="form-group">
+            <label>Xác nhận email mới</label>
+            <input
+              type="email"
+              id="confirmNewEmail"
+              placeholder="Nhập lại email mới"
+            />
+          </div>
+          <div id="emailError" style="color: #ff5555; display: none; margin-top: 10px;"></div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" id="cancelEmailChange">
+            Hủy
+          </button>
+          <button class="btn btn-primary" id="saveEmailChange">
+            Lưu thay đổi
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="modal" id="changeUsernameModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3><i class="fas fa-user-edit"></i> Đổi tên hiển thị</h3>
+          <button class="close-modal" id="closeUsernameModal">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Tên hiện tại</label>
+            <input type="text" id="currentUsernameInput" disabled />
+          </div>
+          <div class="form-group">
+            <label>Tên mới</label>
+            <input type="text" id="newUsernameInput" placeholder="Nhập tên mới (viết liền, không dấu)" />
+          </div>
+          <div id="usernameError" style="color: #ff5555; display: none; margin-top: 10px;"></div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" id="cancelUsernameChange">Hủy</button>
+          <button class="btn btn-primary" id="saveUsernameChange">Lưu thay đổi</button>
+        </div>
+      </div>
+    </div>
+    <!-- Modal: Change Avatar -->
+    <div class="modal" id="changeAvatarModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3><i class="fas fa-camera"></i> Đổi avatar</h3>
+          <button class="close-modal" id="closeAvatarModal">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="avatar-preview">
+            <img id="currentAvatarPreview" src="" alt="Avatar hiện tại" onerror="this.src='images/avatars/1.jpg'" />
+            <h3 id="currentAvatarName" style="margin-top: 10px">
+              Avatar hiện tại
+            </h3>
+          </div>
+
+          <div class="avatar-selection" id="avatarGrid">
+            <!-- Avatar options sẽ được tạo bằng JavaScript -->
+          </div>
+          
+          <div class="avatar-status" id="avatarStatus" style="display: none; text-align: center; margin-top: 10px; color: var(--neon-green);">
+            <i class="fas fa-check-circle"></i> Đã cập nhật avatar thành công!
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            class="btn btn-primary"
+            id="saveAvatarBtn"
+            style="padding: 12px 30px"
+          >
+            <i class="fas fa-save"></i> Lưu Avatar
+          </button>
+          <button
+            class="btn btn-secondary"
+            id="cancelAvatarChange"
+            style="margin-left: 15px"
+          >
+            <i class="fas fa-arrow-left"></i> Hủy
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/services/websocket.js"></script>
+    <script src="js/modules/game/profile.js"></script>
+
+   <script>
+      // Biến toàn cục
+      let eloChartInstance = null;
+      let userData = null;
+
+      // --- 1. HÀM ĐẢM BẢO KẾT NỐI (CORE FIX) ---
+      // Hàm này sẽ chặn mọi thao tác gửi dữ liệu cho đến khi socket thực sự mở
+      function executeWhenConnected(callback) {
+        // Kiểm tra xem thư viện wsService đã load chưa
+        if (typeof wsService === 'undefined' || !wsService) {
+            console.log("Đang đợi wsService khởi tạo...");
+            setTimeout(() => executeWhenConnected(callback), 100);
+            return;
+        }
+
+        // Kiểm tra xem socket đã mở chưa (readyState = 1 là OPEN)
+        if (wsService.socket && wsService.socket.readyState === WebSocket.OPEN) {
+            console.log("Socket đã sẵn sàng. Thực thi lệnh.");
+            callback();
+        } else {
+            console.log("Socket đang kết nối... (State: " + (wsService.socket ? wsService.socket.readyState : 'null') + ")");
+            // Nếu chưa mở, đợi 100ms rồi kiểm tra lại
+            setTimeout(() => executeWhenConnected(callback), 100);
+        }
+      }
+
+      document.addEventListener("DOMContentLoaded", function () {
+        // 1. Kiểm tra đăng nhập (Logic cũ)
+        const user = JSON.parse(localStorage.getItem("user"));
+        if (!user) {
+          alert("Bạn chưa đăng nhập!");
+          window.location.href = "login.html";
+          return;
+        }
+
+        userData = user;
+        console.log("Profile User:", user.username);
+
+        // 2. Hiển thị ngay dữ liệu từ LocalStorage (để người dùng không thấy trang trắng)
+        displayBasicInfo(user);
+        updateStatsFromLocalStorage(); 
+
+        // 3. Khởi tạo các sự kiện nút bấm (không cần mạng)
+        setupEventListeners();
+
+        // 4. Khởi tạo biểu đồ rỗng
+        initializeChart();
+
+        // 5. Thiết lập lắng nghe phản hồi từ Server
+        setupWebSocketHandlers();
+
+        // 6. [QUAN TRỌNG NHẤT] Chờ kết nối xong mới gửi lệnh lấy dữ liệu mới
+        executeWhenConnected(function() {
+            // Các hàm này chỉ chạy khi socket đã OPEN
+            loadUserInfoFromServer(user.username);
+            loadRecentMatches();
+            loadUserRank();
+            requestEloHistory('month');
+        });
+      });
+
+      // --- 2. CÁC HÀM GIAO TIẾP SERVER ---
+      function loadUserInfoFromServer(username) {
+        wsService.send({ type: "GET_USER_INFO", username: username });
+      }
+
+      function loadUserRank() {
+        wsService.send({ type: "GET_RANKING", limit: 100 });
+      }
+
+      function loadRecentMatches() {
+        wsService.send({ type: "GET_HISTORY", username: userData.username, limit: 5 });
+      }
+
+      function requestEloHistory(range) {
+        wsService.send({ type: "GET_ELO_HISTORY", username: userData.username, range: range });
+      }
+
+      // --- 3. CÁC HÀM CẬP NHẬT GIAO DIỆN (UI) ---
+      function displayBasicInfo(user) {
+        // Avatar
+        const profileAvatar = document.getElementById("profileAvatar");
+        if (profileAvatar) {
+          profileAvatar.src = `images/avatars/${user.avatar || '1.jpg'}`;
+          profileAvatar.onerror = function() { this.src = 'images/avatars/1.jpg'; };
+        }
+        // Username
+        const ids = ['profileUsername', 'infoUsername'];
+        ids.forEach(id => {
+            const el = document.getElementById(id);
+            if(el) el.textContent = user.username;
+        });
+        // Email
+        const emailEl = document.getElementById('infoEmail');
+        if (emailEl) emailEl.textContent = user.email || "Chưa cập nhật";
+      }
+
+      function updateStatsFromLocalStorage() {
+        const stats = JSON.parse(localStorage.getItem("userStats")) || { wins: 0, losses: 0, draws: 0 };
+        const user = JSON.parse(localStorage.getItem("user")) || {};
+        updateStatsUI(stats.wins, stats.losses, stats.draws, user.elo);
+      }
+
+      function updateProfileWithServerData(data) {
+        if (data.username) {
+            document.getElementById('profileUsername').textContent = data.username;
+            document.getElementById('infoUsername').textContent = data.username;
+        }
+        if (data.email) document.getElementById('infoEmail').textContent = data.email || "Chưa cập nhật";
+        if (data.joinDate) document.getElementById('joinDate').textContent = new Date(data.joinDate).toLocaleDateString('vi-VN');
+
+        // Cập nhật Avatar nếu có thay đổi
+        if (data.avatar && data.avatar !== userData.avatar) {
+            document.getElementById("profileAvatar").src = `images/avatars/${data.avatar}`;
+            let u = JSON.parse(localStorage.getItem("user"));
+            u.avatar = data.avatar;
+            localStorage.setItem("user", JSON.stringify(u));
+        }
+        // Cập nhật chỉ số
+        updateStatsUI(data.wins, data.losses, data.draws, data.elo);
+      }
+
+      function updateStatsFromServer(data) {
+        updateStatsUI(data.wins, data.losses, data.draws, data.elo);
+      }
+
+      function updateStatsUI(wins = 0, losses = 0, draws = 0, elo = 1500) {
+        const total = wins + losses + draws;
+        
+        setText('statsTotalGames', total);
+        setText('totalGames', total);
+        setText('statsWins', wins);
+        setText('statsLosses', losses);
+        setText('statsDraws', draws);
+        setText('statsElo', elo);
+        setText('userElo', `Elo: ${elo}`);
+        setText('highestElo', elo);
+
+        const winRate = total > 0 ? ((wins / total) * 100).toFixed(1) : 0;
+        setText('statsWinRate', `${winRate}%`);
+
+        updateAchievements(wins, elo, draws);
+      }
+
+      function setText(id, val) {
+          const el = document.getElementById(id);
+          if(el) el.textContent = val;
+      }
+
+      function updateAchievements(wins, elo, draws) {
+        checkAchieve('achievement1', wins >= 1);
+        checkAchieve('achievement2', wins >= 10);
+        checkAchieve('achievement3', wins >= 5);
+        checkAchieve('achievement4', elo >= 1600);
+      }
+
+      function checkAchieve(id, condition) {
+        const el = document.getElementById(id);
+        if(el && condition) {
+          el.textContent = "Đã đạt";
+          el.style.color = "var(--neon-green)";
+        }
+      }
+
+      function findUserRank(list, name) {
+        for(let i=0; i<list.length; i++) {
+          if(list[i].username === name) return i + 1;
+        }
+        return "--";
+      }
+
+      function updateRecentMatches(matches) {
+        const list = document.getElementById('recentMatchesList');
+        if (!matches || matches.length === 0) {
+             list.innerHTML = `<div class="empty-matches"><i class="fas fa-gamepad"></i><p>Chưa có trận đấu nào</p></div>`;
+             return;
+        }
+        
+        list.innerHTML = '';
+        matches.forEach(match => {
+            const isWin = match.result === 'WIN';
+            const isLose = match.result === 'LOSE';
+            const resultClass = isWin ? 'win' : (isLose ? 'lose' : 'draw');
+            const icon = isWin ? 'fa-trophy' : (isLose ? 'fa-times' : 'fa-handshake');
+            const eloChange = isWin ? '+10' : (isLose ? '-5' : '+2');
+
+            const item = document.createElement('div');
+            item.className = 'match-item';
+            item.innerHTML = `
+                <div class="match-result ${resultClass}"><i class="fas ${icon}"></i></div>
+                <div class="match-details">
+                    <div class="match-opponent">vs ${match.opponent}</div>
+                    <div class="match-info">
+                        <span><i class="fas fa-chess-board"></i> ${match.moves} nước</span>
+                        <span><i class="fas fa-chart-line"></i> ${eloChange}</span>
+                        <span><i class="far fa-clock"></i> ${match.time ? new Date(match.time).toLocaleDateString() : 'Vừa xong'}</span>
+                    </div>
+                </div>
+            `;
+            list.appendChild(item);
+        });
+      }
+
+      // --- 4. WEBSOCKET HANDLERS ---
+      function setupWebSocketHandlers() {
+        if (!window.wsService || !wsService.on) return;
+
+        wsService.on("USER_INFO", (data) => updateProfileWithServerData(data));
+        wsService.on("STATS_DATA", (data) => updateStatsFromServer(data));
+        
+        wsService.on("AVATAR_CHANGED", (data) => {
+            let u = JSON.parse(localStorage.getItem("user"));
+            u.avatar = data.avatar;
+            localStorage.setItem("user", JSON.stringify(u));
+            document.getElementById("profileAvatar").src = `images/avatars/${data.avatar}`;
+            document.getElementById("currentAvatarPreview").src = `images/avatars/${data.avatar}`;
+            alert("Đổi avatar thành công!");
+            document.getElementById("changeAvatarModal").style.display = "none";
+            const btn = document.getElementById("saveAvatarBtn");
+            btn.innerHTML = '<i class="fas fa-save"></i> Lưu Avatar';
+            btn.disabled = false;
+        });
+
+        wsService.on("PASSWORD_CHANGED", (data) => {
+            const btn = document.getElementById("savePasswordChange");
+            btn.innerHTML = 'Lưu thay đổi';
+            btn.disabled = false;
+            if(data.success) {
+                alert("Đổi mật khẩu thành công!");
+                document.getElementById("changePasswordModal").style.display = "none";
+                resetPasswordForm();
+            } else {
+                document.getElementById("passwordError").textContent = data.message;
+                document.getElementById("passwordError").style.display = 'block';
+            }
+        });
+
+        wsService.on("EMAIL_CHANGED", (data) => {
+            const btn = document.getElementById("saveEmailChange");
+            btn.innerHTML = 'Lưu thay đổi';
+            btn.disabled = false;
+            if(data.success) {
+                alert("Đổi email thành công!");
+                document.getElementById("infoEmail").textContent = data.newEmail;
+                let u = JSON.parse(localStorage.getItem("user"));
+                u.email = data.newEmail;
+                localStorage.setItem("user", JSON.stringify(u));
+                document.getElementById("changeEmailModal").style.display = "none";
+                resetEmailForm();
+            } else {
+                document.getElementById("emailError").textContent = data.message;
+                document.getElementById("emailError").style.display = 'block';
+            }
+        });
+        wsService.on("USERNAME_CHANGED", (data) => {
+    const btn = document.getElementById("saveUsernameChange");
+    btn.innerHTML = 'Lưu thay đổi';
+    btn.disabled = false;
+
+    if (data.success) {
+        alert("Đổi tên thành công! Vui lòng đăng nhập lại với tên mới.");
+        
+        // Cập nhật LocalStorage
+        let u = JSON.parse(localStorage.getItem("user"));
+        u.username = data.newUsername;
+        localStorage.setItem("user", JSON.stringify(u));
+        
+   
+        document.getElementById("changeUsernameModal").style.display = "none";
+        document.getElementById("profileUsername").textContent = data.newUsername;
+        document.getElementById("infoUsername").textContent = data.newUsername;
+        
+       
+        userData.username = data.newUsername;
+
+      
+    } else {
+        const err = document.getElementById("usernameError");
+        err.textContent = data.message;
+        err.style.display = 'block';
+    }
+});
+        wsService.on("RANKING_DATA", (data) => {
+            if (data.rankingList) {
+                const rank = findUserRank(data.rankingList, userData.username);
+                if (rank) document.getElementById("userRank").textContent = `Hạng: #${rank}`;
+            }
+        });
+
+        wsService.on("HISTORY_DATA", (data) => {
+            if (data.historyList) updateRecentMatches(data.historyList.slice(0, 5));
+        });
+
+        wsService.on("ELO_HISTORY", (data) => {
+             updateEloChart(data.history || []);
+        });
+
+        wsService.on("ERROR", (data) => {
+             console.error("Server Error:", data);
+        });
+      }
+
+      // --- 5. BIỂU ĐỒ ---
+      function initializeChart() {
+        const ctx = document.getElementById('eloChart').getContext('2d');
+        eloChartInstance = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: [],
+                datasets: [{
+                    label: 'Điểm Elo',
+                    data: [],
+                    borderColor: '#00d4ff',
+                    backgroundColor: 'rgba(0, 212, 255, 0.1)',
+                    tension: 0.4,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { labels: { color: 'white' } } },
+                scales: {
+                    y: { grid: { color: 'rgba(255,255,255,0.1)' }, ticks: { color: 'white' } },
+                    x: { grid: { color: 'rgba(255,255,255,0.1)' }, ticks: { color: 'white' } }
+                }
+            }
+        });
+      }
+
+      function updateEloChart(history) {
+        if (!eloChartInstance) return;
+        if (!history || history.length === 0) {
+            // Fake data nếu chưa có history thật
+            const labels = [], data = [];
+            let currentElo = userData.elo || 1500;
+            for(let i=6; i>=0; i--) {
+                const d = new Date(); d.setDate(d.getDate() - i);
+                labels.push(d.toLocaleDateString('vi-VN', {day:'2-digit', month:'2-digit'}));
+                data.push(currentElo - Math.floor(Math.random() * 30));
+            }
+            data[data.length-1] = currentElo;
+            eloChartInstance.data.labels = labels;
+            eloChartInstance.data.datasets[0].data = data;
+        } else {
+            // Logic map data thật nếu có
+        }
+        eloChartInstance.update();
+      }
+
+      function loadEloChart(type) {
+        document.querySelectorAll('.btn-chart').forEach(b => b.classList.remove('active'));
+        event.target.classList.add('active');
+        executeWhenConnected(() => requestEloHistory(type));
+      }
+
+      // --- 6. XỬ LÝ MODAL & SỰ KIỆN ---
+      function setupEventListeners() {
+        document.getElementById("logoutBtn").onclick = () => {
+            localStorage.removeItem("user");
+            window.location.href = "login.html";
+            
+        };
+        const changeUsernameBtn = document.getElementById("changeUsernameBtn");
+        if (changeUsernameBtn) {
+            changeUsernameBtn.onclick = openUsernameModal;
+        }
+        
+        setupModalClose("changeUsernameModal", "closeUsernameModal", "cancelUsernameChange");
+        
+        const saveUsernameBtn = document.getElementById("saveUsernameChange");
+        if (saveUsernameBtn) {
+            saveUsernameBtn.onclick = saveUsername;
+        }
+        function openUsernameModal() {
+    document.getElementById("currentUsernameInput").value = userData.username;
+    document.getElementById("newUsernameInput").value = "";
+    document.getElementById("usernameError").style.display = "none";
+    document.getElementById("changeUsernameModal").style.display = "flex";
+}
+
+function saveUsername() {
+    const newName = document.getElementById("newUsernameInput").value.trim();
+    const err = document.getElementById("usernameError");
+
+    // Validate phía Client
+    if (!newName) {
+        err.textContent = "Vui lòng nhập tên mới";
+        err.style.display = "block";
+        return;
+    }
+    if (newName.length < 3) {
+        err.textContent = "Tên phải dài hơn 3 ký tự";
+        err.style.display = "block";
+        return;
+    }
+    if (newName === userData.username) {
+        err.textContent = "Tên mới phải khác tên cũ";
+        err.style.display = "block";
+        return;
+    }
+
+    // Gửi yêu cầu
+    const btn = document.getElementById("saveUsernameChange");
+    btn.innerHTML = "Đang xử lý...";
+    btn.disabled = true;
+
+    executeWhenConnected(() => {
+        wsService.send({
+            type: "CHANGE_USERNAME",
+            username: userData.username,
+            newUsername: newName
+        });
+    });
+}
+        
+        document.getElementById("changeAvatarBtn").onclick = openAvatarModal;
+        document.getElementById("changePasswordBtn").onclick = openPassModal;
+        document.getElementById("changeEmailBtn").onclick = openEmailModal;
+        document.getElementById("exportDataBtn").onclick = exportUserData;
+
+        setupModalClose("changeAvatarModal", "closeAvatarModal", "cancelAvatarChange");
+        setupModalClose("changePasswordModal", "closePasswordModal", "cancelPasswordChange");
+        setupModalClose("changeEmailModal", "closeEmailModal", "cancelEmailChange");
+
+        document.getElementById("saveAvatarBtn").onclick = saveAvatar;
+        document.getElementById("savePasswordChange").onclick = savePassword;
+        document.getElementById("saveEmailChange").onclick = saveEmail;
+      }
+
+      function setupModalClose(modalId, closeBtnId, cancelBtnId) {
+        const modal = document.getElementById(modalId);
+        const close = document.getElementById(closeBtnId);
+        const cancel = document.getElementById(cancelBtnId);
+        const closeFunc = () => { 
+            modal.style.display = "none"; 
+            clearErrors();
+        };
+        if(close) close.onclick = closeFunc;
+        if(cancel) cancel.onclick = closeFunc;
+        window.addEventListener('click', (e) => { if(e.target === modal) closeFunc(); });
+      }
+
+      function clearErrors() {
+        const pErr = document.getElementById("passwordError");
+        if(pErr) pErr.style.display = "none";
+        const eErr = document.getElementById("emailError");
+        if(eErr) eErr.style.display = "none";
+        document.querySelectorAll('.modal input').forEach(i => i.value = '');
+      }
+
+      // --- LOGIC CHI TIẾT MODAL ---
+      function openAvatarModal() {
+          const current = userData.avatar || "1.jpg";
+          document.getElementById("currentAvatarPreview").src = `images/avatars/${current}`;
+          const grid = document.getElementById("avatarGrid");
+          grid.innerHTML = "";
+          ["1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg"].forEach(av => {
+              const div = document.createElement("div");
+              div.className = `avatar-option ${av === current ? 'selected' : ''}`;
+              div.innerHTML = `<img src="images/avatars/${av}">`;
+              div.onclick = function() {
+                  document.querySelectorAll(".avatar-option").forEach(el => el.classList.remove("selected"));
+                  this.classList.add("selected");
+                  document.getElementById("currentAvatarPreview").src = `images/avatars/${av}`;
+                  document.getElementById("saveAvatarBtn").dataset.selected = av;
+              };
+              grid.appendChild(div);
+          });
+          document.getElementById("changeAvatarModal").style.display = "flex";
+      }
+
+      function saveAvatar() {
+          const selected = document.getElementById("saveAvatarBtn").dataset.selected;
+          if(!selected || selected === userData.avatar) {
+              alert("Bạn chưa chọn avatar mới hoặc chọn ảnh cũ!");
+              return;
+          }
+          const btn = document.getElementById("saveAvatarBtn");
+          btn.innerHTML = 'Đang lưu...';
+          btn.disabled = true;
+
+          executeWhenConnected(() => {
+              wsService.send({
+                  type: "CHANGE_AVATAR",
+                  username: userData.username,
+                  avatar: selected
+              });
+          });
+      }
+
+      function openPassModal() { document.getElementById("changePasswordModal").style.display = "flex"; }
+      function openEmailModal() { 
+          document.getElementById("currentEmail").value = userData.email || "";
+          document.getElementById("changeEmailModal").style.display = "flex"; 
+      }
+
+      function savePassword() {
+          const curr = document.getElementById("currentPassword").value;
+          const newP = document.getElementById("newPassword").value;
+          const conf = document.getElementById("confirmNewPassword").value;
+          const err = document.getElementById("passwordError");
+
+          if(!curr || !newP || !conf) { err.textContent = "Thiếu thông tin"; err.style.display = "block"; return; }
+          if(newP !== conf) { err.textContent = "Mật khẩu xác nhận không khớp"; err.style.display = "block"; return; }
+
+          const btn = document.getElementById("savePasswordChange");
+          btn.disabled = true; btn.innerHTML = "Đang xử lý...";
+
+          executeWhenConnected(() => {
+              wsService.send({
+                  type: "CHANGE_PASSWORD",
+                  username: userData.username,
+                  currentPassword: curr,
+                  newPassword: newP
+              });
+          });
+      }
+
+      function saveEmail() {
+          const newE = document.getElementById("newEmail").value;
+          const confE = document.getElementById("confirmNewEmail").value;
+          const err = document.getElementById("emailError");
+
+          if(!newE || !confE) { err.textContent = "Thiếu thông tin"; err.style.display = "block"; return; }
+          if(newE !== confE) { err.textContent = "Email xác nhận không khớp"; err.style.display = "block"; return; }
+
+          const btn = document.getElementById("saveEmailChange");
+          btn.disabled = true; btn.innerHTML = "Đang xử lý...";
+
+          executeWhenConnected(() => {
+              wsService.send({
+                  type: "CHANGE_EMAIL",
+                  username: userData.username,
+                  newEmail: newE
+              });
+          });
+      }
+
+      function exportUserData() {
+          const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(userData, null, 2));
+          const node = document.createElement('a');
+          node.setAttribute("href", dataStr);
+          node.setAttribute("download", userData.username + "_profile.json");
+          document.body.appendChild(node);
+          node.click();
+          node.remove();
+      }
+    </script>
+
+  </body>
+</html>

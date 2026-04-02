@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng nhập - Cờ Caro Online</title>
+    <link rel="stylesheet" href="css/auth.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="js/services/websocket.js"></script> <script src="js/modules/auth/login.js"></script>
+    
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-card">
+            <!-- Header -->
+            <div class="auth-header">
+                <h1 class="auth-title">ĐĂNG NHẬP</h1>
+                <p class="auth-subtitle">Đăng nhập để bắt đầu chơi cờ Caro</p>
+            </div>
+           
+        
+            <form id="loginForm">
+                <!-- Username -->
+                <div class="form-group">
+                    <label class="form-label">Tên đăng nhập hoặc Email</label>
+                    <div class="input-group">
+                        <i class="fas fa-user"></i>
+                        <input type="text" id="username" placeholder="Nhập username hoặc email" required>
+                    </div>
+                    <div class="error-message" id="usernameError"></div>
+                </div>
+
+                <!-- Password -->
+                <div class="form-group">
+                    <label class="form-label">Mật khẩu</label>
+                    <div class="input-group">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="password" placeholder="Nhập mật khẩu" required>
+                        <button type="button" class="password-toggle" id="togglePassword">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                    <div class="error-message" id="passwordError"></div>
+                </div>
+
+                <!-- Options -->
+                <div class="form-options">
+                    <label class="remember-me">
+                        <input type="checkbox" id="rememberMe">
+                        <span>Ghi nhớ đăng nhập</span>
+                    </label>
+                    <a href="#" class="forgot-password" id="forgotPassword">Quên mật khẩu?</a>
+                </div>
+
+                <!-- Submit -->
+                <button type="submit" class="btn-auth" id="loginBtn">
+                    <i class="fas fa-sign-in-alt"></i>
+                    Đăng nhập
+                </button>
+
+                <!-- Register Link -->
+                <div class="auth-footer">
+                    <p>Chưa có tài khoản? <a href="register.html">Đăng ký ngay</a></p>
+                </div>
+            </form>
+
+            
+    <!-- Forgot Password Modal -->
+    <div class="modal-overlay" id="forgotPasswordModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Quên mật khẩu</h3>
+                <button class="modal-close" id="closeForgotModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Nhập email của bạn để nhận link đặt lại mật khẩu:</p>
+                <div class="form-group">
+                    <input type="email" id="resetEmail" placeholder="Email của bạn" class="input-group" style="padding-left: 15px;">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-modal btn-secondary" id="cancelReset">Hủy</button>
+                <button class="btn-modal btn-primary" id="sendResetLink">Gửi</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading -->
+    <div class="loading" id="loading">
+        <div class="spinner"></div>
+    </div>
+
+    <script src="js/modules/auth/login.js"></script>
+</body>
+</html>

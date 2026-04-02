@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng ký - Cờ Caro Online</title>
+    <link rel="stylesheet" href="css/auth.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="js/services/websocket.js"></script> <script src="js/modules/auth/login.js"></script>
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-card">
+            <!-- Header -->
+            <div class="auth-header">
+                <h1 class="auth-title">ĐĂNG KÝ TÀI KHOẢN</h1>
+                <p class="auth-subtitle">Tạo tài khoản mới để bắt đầu chơi</p>
+            </div>
+
+            <!-- Form -->
+            <form id="registerForm">
+                <!-- Username -->
+                <div class="form-group">
+                    <label class="form-label">Tên đăng nhập</label>
+                    <div class="input-group">
+                        <i class="fas fa-user"></i>
+                        <input type="text" id="regUsername" placeholder="3-20 ký tự (chữ, số, _)" required>
+                    </div>
+                    <div class="error-message" id="usernameError"></div>
+                </div>
+
+                <!-- Email -->
+                <div class="form-group">
+                    <label class="form-label">Email</label>
+                    <div class="input-group">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="regEmail" placeholder="email@example.com" required>
+                    </div>
+                    <div class="error-message" id="emailError"></div>
+                </div>
+
+                <!-- Password -->
+                <div class="form-group">
+                    <label class="form-label">Mật khẩu</label>
+                    <div class="input-group">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="regPassword" placeholder="Ít nhất 8 ký tự" required minlength="8">
+                        <button type="button" class="password-toggle" id="toggleRegPassword">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                    <div class="password-strength">
+                        <div class="strength-bar">
+                            <div class="strength-fill" id="strengthFill"></div>
+                        </div>
+                        <div class="strength-text" id="strengthText">Mật khẩu yếu</div>
+                    </div>
+                    <div class="error-message" id="passwordError"></div>
+                </div>
+
+                <!-- Confirm Password -->
+                <div class="form-group">
+                    <label class="form-label">Xác nhận mật khẩu</label>
+                    <div class="input-group">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="regConfirmPassword" placeholder="Nhập lại mật khẩu" required>
+                        <button type="button" class="password-toggle" id="toggleConfirmPassword">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                    <div class="error-message" id="confirmPasswordError"></div>
+                </div>
+
+                <!-- Terms -->
+                <div class="form-group">
+                    <label class="remember-me">
+                        <input type="checkbox" id="acceptTerms" required>
+                        <span>Tôi đồng ý với <a href="#" style="color: var(--primary-blue);">Điều khoản sử dụng</a></span>
+                    </label>
+                    <div class="error-message" id="termsError"></div>
+                </div>
+
+                <!-- Submit -->
+                <button type="submit" class="btn-auth" id="registerBtn">
+                    <i class="fas fa-user-plus"></i>
+                    Tạo tài khoản
+                </button>
+
+                <!-- Login Link -->
+                <div class="auth-footer">
+                    <p>Đã có tài khoản? <a href="login.html">Đăng nhập ngay</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Loading -->
+    <div class="loading" id="loading">
+        <div class="spinner"></div>
+    </div>
+
+    <script src="js/modules/auth/register.js"></script>
+</body>
+</html>
